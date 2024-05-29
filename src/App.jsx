@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import List from "./components/List";
 
 // TODO: 콘솔창을 확인해보고 input 타이핑할 때 마다
@@ -17,8 +17,12 @@ const App = () => {
     setInput("");
   };
 
-  const filteredItems = items.filter((item) =>
-    item.toLocaleLowerCase().includes("item"),
+  const filteredItems = useMemo(
+    () =>
+      items.filter((item) =>
+        item.toLocaleLowerCase().includes("item")
+      ),
+    [items] // items상태가 변경될때만 리렌더링
   );
 
   return (
